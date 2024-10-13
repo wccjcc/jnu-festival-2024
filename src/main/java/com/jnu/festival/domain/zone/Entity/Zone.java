@@ -1,6 +1,6 @@
 package com.jnu.festival.domain.zone.Entity;
 
-import com.jnu.festival.domain.partner.Entity.BaseTimeEntity;
+import com.jnu.festival.domain.partner.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

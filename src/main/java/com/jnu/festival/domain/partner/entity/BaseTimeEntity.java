@@ -1,4 +1,4 @@
-package com.jnu.festival.domain.partner.Entity;
+package com.jnu.festival.domain.partner.entity;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

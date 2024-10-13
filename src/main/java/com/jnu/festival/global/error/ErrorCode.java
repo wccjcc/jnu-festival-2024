@@ -15,6 +15,8 @@ public enum ErrorCode {
     NOT_FOUND_RESOURCE(HttpStatus.NOT_FOUND, "해당 리소스가 존재하지 않습니다."),
     NOT_FOUND_AUTHORIZATION_HEADER(HttpStatus.NOT_FOUND, "Authorization 헤더가 존재하지 않습니다."),
     NOT_FOUND_USER(HttpStatus.NOT_FOUND, "존재하지 않는 사용자입니다."),
+    NOT_FOUND_PARTNER(HttpStatus.NOT_FOUND, "존재하지 않는 제휴업체입니다."),
+    NOT_FOUND_PARTNERBOOKMARK(HttpStatus.NOT_FOUND,"존재하지 않는 제휴업체북마크입니다."),
 
     // Invalid Argument Error
     INVALID_SOCKET_ERROR(HttpStatus.BAD_REQUEST, "유효하지 않은 소켓입니다."),
