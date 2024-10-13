@@ -1,8 +1,6 @@
 package com.jnu.festival.domain.partner.Service;
 
-import com.jnu.festival.domain.partner.DTO.PartnerDto;
 import com.jnu.festival.domain.partner.DTO.PartnerSummaryDto;
-import com.jnu.festival.domain.partner.Entity.Partner;
 import com.jnu.festival.domain.partner.Repository.PartnerImageRepository;
 import com.jnu.festival.domain.partner.Repository.PartnerJPARepository;
 import com.jnu.festival.exceptions.ResourceNotFoundException;

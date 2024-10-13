@@ -1,7 +1,6 @@
 package com.jnu.festival.domain.partner.Controller;
 
 import com.jnu.festival.domain.partner.DTO.PartnerSummaryDto;
-import com.jnu.festival.domain.partner.Entity.Partner;
 import com.jnu.festival.domain.partner.Service.PartnerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
