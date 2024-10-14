@@ -1,6 +1,8 @@
 package com.jnu.festival.domain.booth.entity;
 
+
 import com.jnu.festival.domain.common.Location;
+
 import com.jnu.festival.global.util.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -50,10 +52,13 @@ public class Booth extends BaseTimeEntity {
     @Column(name = "period", nullable = false)
     private Period period;
 
+    @Column(name = "image", nullable = false)
+    private String image;
+
     @Builder
     public Booth(String name, Location location, Integer index,
                  LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime,
-                 String description, BoothCategory category, Period period) {
+                 String description, BoothCategory category, Period period, String image) {
         this.name = name;
         this.location = location;
         this.index = index;
@@ -64,5 +69,6 @@ public class Booth extends BaseTimeEntity {
         this.description = description;
         this.category = category;
         this.period = period;
+        this.image = image;
     }
 }

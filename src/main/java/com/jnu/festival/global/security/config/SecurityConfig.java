@@ -56,7 +56,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/login",
                                 "/api/v1/zones/**",
                                 "/api/v1/partners/**",
-                                "/api/v1/contents/**").permitAll()
+                                "/api/v1/contents/**",
+                                "/api/v1/booths/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/timecapsules").permitAll()
                         .anyRequest().authenticated()
                 )
