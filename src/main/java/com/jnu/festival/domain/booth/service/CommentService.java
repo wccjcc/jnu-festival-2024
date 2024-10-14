@@ -5,6 +5,7 @@ import com.jnu.festival.domain.booth.dto.CommentRequestDto;
 import com.jnu.festival.domain.booth.dto.CommentResponseDto;
 import com.jnu.festival.domain.booth.entity.Booth;
 import com.jnu.festival.domain.booth.entity.Comment;
+import com.jnu.festival.domain.booth.repository.BoothJPARepository;
 import com.jnu.festival.domain.booth.repository.BoothRepository;
 import com.jnu.festival.domain.booth.repository.CommentRepository;
 import com.jnu.festival.domain.user.entity.User;
@@ -23,14 +24,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CommentService {
     private final UserRepository userRepository;
-    private final BoothRepository boothRepository;
+    private final BoothJPARepository boothJPARepository;
     private final CommentRepository commentRepository;
 
     @Transactional
-    public void createComment(UserDetailsImpl userDetails, Long boothId, CommentRequestDto dto){
+    public void createComment(UserDetailsImpl userDetails, Long boothId, CommentRequestDto dto) {
         User user = userRepository.findByNickname(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_USER));
-        Booth booth = boothRepository.findById(boothId)
+        Booth booth = boothJPARepository.findById(boothId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_BOOTH));
 
         Comment comment = commentRepository.save(
@@ -43,10 +44,10 @@ public class CommentService {
     }
 
     @Transactional
-    public void deleteComment(UserDetailsImpl userDetails, Long boothId, Long commentId){
+    public void deleteComment(UserDetailsImpl userDetails, Long boothId, Long commentId) {
         User user = userRepository.findByNickname(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_USER));
-        Booth booth = boothRepository.findById(boothId)
+        Booth booth = boothJPARepository.findById(boothId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_BOOTH));
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_COMMENT));
@@ -65,7 +66,7 @@ public class CommentService {
 
     public CommentListResponseDto getComments(Long boothId) {
 
-        Booth booth = boothRepository.findById(boothId)
+        Booth booth = boothJPARepository.findById(boothId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_BOOTH));
 
         List<Comment> comments = commentRepository.findCommentsByBooth(booth);
