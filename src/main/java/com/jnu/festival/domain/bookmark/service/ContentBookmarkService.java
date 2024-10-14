@@ -1,9 +1,11 @@
 package com.jnu.festival.domain.bookmark.service;
 
 import com.jnu.festival.domain.bookmark.entity.ContentBookmark;
+import com.jnu.festival.domain.bookmark.entity.PartnerBookmark;
 import com.jnu.festival.domain.bookmark.repository.ContentBookmarkRepository;
 import com.jnu.festival.domain.content.entity.Content;
 import com.jnu.festival.domain.content.repository.ContentRepository;
+import com.jnu.festival.domain.partner.entity.Partner;
 import com.jnu.festival.domain.user.entity.User;
 import com.jnu.festival.domain.user.repository.UserRepository;
 import com.jnu.festival.global.error.ErrorCode;
@@ -17,7 +19,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class BookmarkService {
+public class ContentBookmarkService {
     private final UserRepository userRepository;
     private final ContentRepository contentRepository;
     private final ContentBookmarkRepository contentBookmarkRepository;
