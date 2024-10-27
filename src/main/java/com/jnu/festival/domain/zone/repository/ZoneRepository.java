@@ -1,7 +1,7 @@
-package com.jnu.festival.domain.zone.repository;
+package com.jnu.festival.domain.zone.Repository;
 
 import com.jnu.festival.domain.common.Location;
-import com.jnu.festival.domain.zone.entity.Zone;
+import com.jnu.festival.domain.zone.Entity.Zone;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

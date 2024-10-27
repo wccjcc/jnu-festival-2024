@@ -1,4 +1,4 @@
-package com.jnu.festival.domain.zone.entity;
+package com.jnu.festival.domain.zone.Entity;
 
 import com.jnu.festival.domain.common.Location;
 import com.jnu.festival.global.util.BaseTimeEntity;

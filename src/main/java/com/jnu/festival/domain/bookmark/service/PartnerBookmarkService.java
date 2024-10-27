@@ -7,7 +7,7 @@ import com.jnu.festival.domain.bookmark.repository.PartnerBookmarkRepository;
 import com.jnu.festival.domain.content.entity.Content;
 import com.jnu.festival.domain.content.repository.ContentRepository;
 import com.jnu.festival.domain.partner.entity.Partner;
-import com.jnu.festival.domain.partner.repository.PartnerRepository;
+import com.jnu.festival.domain.partner.Repository.PartnerRepository;
 import com.jnu.festival.domain.user.entity.User;
 import com.jnu.festival.domain.user.repository.UserRepository;
 import com.jnu.festival.global.error.ErrorCode;

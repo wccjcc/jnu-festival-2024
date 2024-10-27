@@ -1,4 +1,4 @@
-package com.jnu.festival.domain.partner.repository;
+package com.jnu.festival.domain.partner.Repository;
 
 import com.jnu.festival.domain.content.entity.Content;
 import com.jnu.festival.domain.content.entity.ContentImage;
