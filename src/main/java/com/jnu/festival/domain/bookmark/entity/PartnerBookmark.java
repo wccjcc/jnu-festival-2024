@@ -8,10 +8,12 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Table(name = "partner_bookmark")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SQLDelete(sql = "update partner_bookmark set is_deleted = true where id = ?")
 @Getter
 public class PartnerBookmark {
     @Id
@@ -26,17 +28,20 @@ public class PartnerBookmark {
     @JoinColumn(name = "partner_id", nullable = false)
     private Partner partner;
 
-    @Column(name="isdeleted",nullable = false)
-    private boolean isDeleted;
+
+    @Column(name="is_deleted",nullable = false)
+    private Boolean isDeleted;
 
     @Builder
-    public PartnerBookmark(User user, Partner partner, boolean isDeleted) {
+    public PartnerBookmark(User user, Partner partner, Boolean isDeleted) {
+
         this.user = user;
         this.partner = partner;
         this.isDeleted = isDeleted;
     }
 
     public void updateIsDeleted(){
-        this.isDeleted = !this.isDeleted;
+        this.isDeleted = Boolean.FALSE;
+
     }
 }

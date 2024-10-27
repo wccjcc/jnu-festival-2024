@@ -1,6 +1,6 @@
 package com.jnu.festival.domain.partner.entity;
 
-import com.jnu.festival.domain.common.Location;
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -22,7 +22,7 @@ public class Partner extends BaseTimeEntity {
     private String name;
 
     @Column(name = "location", nullable = false)
-    private Location location;
+    private String location;
 
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
@@ -36,7 +36,7 @@ public class Partner extends BaseTimeEntity {
 
 
     @Builder
-    public Partner(String name, Location location, LocalDate startDate, LocalDate endDate, String description) {
+    public Partner(String name, String location, LocalDate startDate, LocalDate endDate, String description) {
         this.name = name;
         this.location = location;
         this.startDate = startDate;
