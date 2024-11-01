@@ -29,4 +29,7 @@ public interface PartnerBookmarkRepository extends JpaRepository<PartnerBookmark
     @Query("delete from PartnerBookmark as pb where pb.partner = :partner")
     void deleteAllByPartner(Partner partner);
 
+    @Query("select pb from PartnerBookmark as pb where pb.user = :user")
+    List<PartnerBookmark> findAllByUser(User user);
+
 }
