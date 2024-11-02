@@ -71,7 +71,15 @@ public class GlobalExceptionHandler {
     // 개발자가 직접 정의한 예외
     @ExceptionHandler(value = {BusinessException.class})
     public ResponseEntity<ResponseDto<?>> handleApiException(BusinessException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResponseDto.fail(e));
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResponseDto.fail(e));
+        HttpStatus status;
+        if (e.getErrorCode() == ErrorCode.NOT_FOUND_PARTNER) {
+            status = HttpStatus.NOT_FOUND;
+        } else {
+            status = HttpStatus.BAD_REQUEST;
+        }
+
+        return ResponseEntity.status(status).body(ResponseDto.fail(e));
     }
 
     // 서버, DB 예외

@@ -1,9 +1,11 @@
 package com.jnu.festival.domain.zone.Controller;
 
-import com.jnu.festival.domain.zone.DTO.response.ZoneListDto;
+import com.jnu.festival.domain.zone.DTO.ZoneRequestDto;
+import com.jnu.festival.domain.zone.Entity.Location;
+import com.jnu.festival.domain.zone.Repository.ZoneRepository;
 import com.jnu.festival.domain.zone.Service.ZoneService;
-import com.jnu.festival.global.util.ResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +21,14 @@ public class ZoneController {
 
     private final ZoneService zoneService;
 
-    @GetMapping(value = "")
-    public ResponseEntity<?> readZoneList(@RequestParam(required = false) String location) {
-        List<ZoneListDto> response = zoneService.readZoneList(location);
-        return ResponseEntity.ok(ResponseDto.ok(response));
+//    public ZoneController(ZoneService zoneService){
+//        this.zoneService = zoneService;
+//    }
+
+    @GetMapping
+    public ResponseEntity<List<ZoneRequestDto>> getZoneByQuery(@RequestParam Location location){
+        List<ZoneRequestDto> result = zoneService.getZoneByQuery(location);
+        return ResponseEntity.ok(result);
     }
 
 }

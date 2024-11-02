@@ -1,4 +1,4 @@
-package com.jnu.festival.domain.partner.dto;
+package com.jnu.festival.domain.partner.DTO;
 
 import lombok.Builder;
 import lombok.Getter;

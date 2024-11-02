@@ -28,11 +28,13 @@ public class PartnerBookmark {
     @JoinColumn(name = "partner_id", nullable = false)
     private Partner partner;
 
+
     @Column(name="is_deleted",nullable = false)
     private Boolean isDeleted;
 
     @Builder
     public PartnerBookmark(User user, Partner partner, Boolean isDeleted) {
+
         this.user = user;
         this.partner = partner;
         this.isDeleted = isDeleted;
@@ -40,5 +42,6 @@ public class PartnerBookmark {
 
     public void updateIsDeleted(){
         this.isDeleted = Boolean.FALSE;
+
     }
 }

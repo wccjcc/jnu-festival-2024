@@ -30,6 +30,7 @@ public enum ErrorCode {
     NOT_FOUND_FEEDBACK(HttpStatus.NOT_FOUND, "존재하지 않는 피드백입니다"),
 
 
+
     // Invalid Argument Error
     INVALID_SOCKET_ERROR(HttpStatus.BAD_REQUEST, "유효하지 않은 소켓입니다."),
     MISSING_REQUEST_PARAMETER(HttpStatus.BAD_REQUEST, "필수 요청 파라미터가 누락되었습니다."),

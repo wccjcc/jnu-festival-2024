@@ -15,6 +15,7 @@ import java.util.Optional;
 
 public interface PartnerBookmarkRepository extends JpaRepository<PartnerBookmark, Long> {
 
+
     @Query("select pb.partner from PartnerBookmark as pb where pb.user = :user and pb.isDeleted = false")
     List<Partner> findAllByUserAndIsDeleted(User user);
 
@@ -27,4 +28,8 @@ public interface PartnerBookmarkRepository extends JpaRepository<PartnerBookmark
     @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Query("delete from PartnerBookmark as pb where pb.partner = :partner")
     void deleteAllByPartner(Partner partner);
+
+    @Query("select pb from PartnerBookmark as pb where pb.user = :user")
+    List<PartnerBookmark> findAllByUser(User user);
+
 }

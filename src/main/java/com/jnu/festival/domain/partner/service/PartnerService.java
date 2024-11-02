@@ -1,12 +1,12 @@
-package com.jnu.festival.domain.partner.service;
+package com.jnu.festival.domain.partner.Service;
 
 import com.jnu.festival.domain.bookmark.repository.PartnerBookmarkRepository;
-import com.jnu.festival.domain.partner.dto.PartnerDto;
-import com.jnu.festival.domain.partner.dto.PartnerListDto;
+import com.jnu.festival.domain.partner.DTO.PartnerDto;
+import com.jnu.festival.domain.partner.DTO.PartnerListDto;
 import com.jnu.festival.domain.partner.entity.Partner;
 import com.jnu.festival.domain.partner.entity.PartnerImage;
-import com.jnu.festival.domain.partner.repository.PartnerImageRepository;
-import com.jnu.festival.domain.partner.repository.PartnerRepository;
+import com.jnu.festival.domain.partner.Repository.PartnerImageRepository;
+import com.jnu.festival.domain.partner.Repository.PartnerRepository;
 import com.jnu.festival.domain.user.entity.User;
 import com.jnu.festival.domain.user.repository.UserRepository;
 import com.jnu.festival.global.error.ErrorCode;
