@@ -30,7 +30,6 @@ public enum ErrorCode {
     NOT_FOUND_FEEDBACK(HttpStatus.NOT_FOUND, "존재하지 않는 피드백입니다"),
 
 
-
     // Invalid Argument Error
     INVALID_SOCKET_ERROR(HttpStatus.BAD_REQUEST, "유효하지 않은 소켓입니다."),
     MISSING_PATH_VARIABLE(HttpStatus.BAD_REQUEST, "필수 경로 변수가 누락되었습니다."),
@@ -38,6 +37,8 @@ public enum ErrorCode {
     INVALID_ARGUMENT(HttpStatus.BAD_REQUEST, "유효하지 않은 인자입니다."),
     INVALID_PARAMETER_FORMAT(HttpStatus.BAD_REQUEST, "유효하지 않은 인자 형식입니다."),
     INVALID_HEADER_ERROR(HttpStatus.BAD_REQUEST, "유효하지 않은 헤더입니다."),
+    INVALID_PERIOD(HttpStatus.BAD_REQUEST, "유효하지 않은 period입니다."),
+    INVALID_CATEGORY(HttpStatus.BAD_REQUEST, "유효하지 않은 category입니다."),
     MISSING_REQUEST_HEADER(HttpStatus.BAD_REQUEST, "필수 요청 헤더가 누락되었습니다."),
     BAD_REQUEST_PARAMETER(HttpStatus.BAD_REQUEST, "잘못된 요청 파라미터입니다."),
     UNSUPPORTED_MEDIA_TYPE(HttpStatus.BAD_REQUEST, "지원하지 않는 미디어 타입입니다."),
