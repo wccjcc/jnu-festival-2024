@@ -29,6 +29,10 @@ public class FeedbackService {
 
     @Transactional
     public void createFeedback(FeedbackRequestDto request, MultipartFile image, UserDetailsImpl userDetails) throws IOException {
+        if (!request.category().isEmpty() && FeedbackCategory.from(request.category()) == null) {
+            throw new BusinessException(ErrorCode.INVALID_CATEGORY);
+        }
+
         User user = userRepository.findByNickname(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_USER));
 
