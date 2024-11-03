@@ -1,35 +1,33 @@
-package com.jnu.festival.domain.zone.service;
+package com.jnu.festival.domain.zone.Service;
 
-import com.jnu.festival.global.common.Location;
-import com.jnu.festival.domain.zone.dto.response.ZoneListDto;
-import com.jnu.festival.domain.zone.entity.Zone;
-import com.jnu.festival.domain.zone.repository.ZoneRepository;
-import com.jnu.festival.global.error.ErrorCode;
-import com.jnu.festival.global.error.exception.BusinessException;
+import com.jnu.festival.domain.partner.Repository.PartnerJPARepository;
+import com.jnu.festival.domain.zone.DTO.ZoneRequestDto;
+import com.jnu.festival.domain.zone.Entity.Location;
+import com.jnu.festival.domain.zone.Entity.Zone;
+import com.jnu.festival.domain.zone.Repository.ZoneRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class ZoneService {
     private final ZoneRepository zoneRepository;
 
-    public List<ZoneListDto> readZoneList(String location) {
-        Location convertLocation = Location.from(location);
+    @Autowired
+    public ZoneService(ZoneRepository zoneRepository){
+        this.zoneRepository = zoneRepository;
+    }
 
-        if (convertLocation == null) {
-            throw new BusinessException(ErrorCode.INVALID_LOCATION);
-        }
+    //zone 조회
 
-        List<Zone> zones = zoneRepository.findAllByLocation(convertLocation);
+    public List<ZoneRequestDto> getZoneByQuery(Location location){
+        List<Zone> zones = zoneRepository.findByLocation(location);
         return zones.stream()
-                .map(zone -> ZoneListDto.builder()
-                        .id(zone.getId())
-                        .name(zone.getName())
-                        .description(zone.getDescription())
-                        .build())
-                .toList();
+                .map(Zone -> new ZoneRequestDto(Zone.getId(),Zone.getTitle(),Zone.getLocation(),Zone.getDescription()))
+                .collect(Collectors.toList());
     }
 }
