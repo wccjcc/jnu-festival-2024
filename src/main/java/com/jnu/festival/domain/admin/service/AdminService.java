@@ -72,6 +72,10 @@ public class AdminService {
 
     @Transactional
     public void createZone(ZoneRequestDto request) {
+        if (Location.from(request.location()) == null) {
+            throw new BusinessException(ErrorCode.INVALID_LOCATION);
+        }
+
         zoneRepository.save(
                 Zone.builder()
                         .name(request.name())
@@ -103,7 +107,7 @@ public class AdminService {
         if (images != null) {
             List<PartnerImage> partnerImages = new ArrayList<>();
 
-            for (MultipartFile image: images) {
+            for (MultipartFile image : images) {
                 String url = s3Service.upload(image, "partner");
                 PartnerImage partnerImage = PartnerImage.builder()
                         .partner(partner)
@@ -138,7 +142,7 @@ public class AdminService {
         if (images != null) {
             List<ContentImage> contentImages = new ArrayList<>();
 
-            for (MultipartFile image: images) {
+            for (MultipartFile image : images) {
                 String url = s3Service.upload(image, "content");
                 ContentImage contentImage = ContentImage.builder()
                         .content(content)
@@ -163,6 +167,14 @@ public class AdminService {
 
     @Transactional
     public void createBooth(BoothRequestDto request, List<MultipartFile> images) throws IOException {
+        if (Location.from(request.location()) == null) {
+            throw new BusinessException(ErrorCode.INVALID_LOCATION);
+        }
+
+        if (BoothCategory.from(request.category()) == null) {
+            throw new BusinessException(ErrorCode.INVALID_LOCATION);
+        }
+
         Booth booth = boothRepository.save(
                 Booth.builder()
                         .name(request.name())
@@ -181,7 +193,7 @@ public class AdminService {
         if (images != null) {
             List<BoothImage> boothImages = new ArrayList<>();
 
-            for (MultipartFile image: images) {
+            for (MultipartFile image : images) {
                 String url = s3Service.upload(image, "booth");
                 BoothImage boothImage = BoothImage.builder()
                         .booth(booth)
@@ -230,6 +242,10 @@ public class AdminService {
     }
 
     public List<FeedbackListDto> readFeedbackList(String category) {
+        if (!category.isEmpty() && FeedbackCategory.from(category) == null) {
+            throw new BusinessException(ErrorCode.INVALID_CATEGORY);
+        }
+
         List<Feedback> feedbacks = feedbackRepository.findAllByCategory(FeedbackCategory.from(category));
         return feedbacks.stream()
                 .map(feedback -> FeedbackListDto.builder()
