@@ -13,38 +13,38 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @WebMvcTest(UserController.class)
 class UserControllerTest {
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private UserService userService;
-
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void readUser() {
-        // given
-
-        // when
-
-        // then
-    }
-
-    @Test
-    void readPartnerBookmarkList() {
-    }
-
-    @Test
-    void readContentBookmarkList() {
-    }
-
-    @Test
-    void readBoothBookmark() {
-    }
+//    @Autowired
+//    private MockMvc mockMvc;
+//
+//    @Autowired
+//    private UserService userService;
+//
+//    @BeforeEach
+//    void setUp() {
+//    }
+//
+//    @AfterEach
+//    void tearDown() {
+//    }
+//
+//    @Test
+//    void readUser() {
+//        // given
+//
+//        // when
+//
+//        // then
+//    }
+//
+//    @Test
+//    void readPartnerBookmarkList() {
+//    }
+//
+//    @Test
+//    void readContentBookmarkList() {
+//    }
+//
+//    @Test
+//    void readBoothBookmark() {
+//    }
 }

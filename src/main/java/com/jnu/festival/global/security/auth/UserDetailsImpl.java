@@ -1,4 +1,4 @@
-package com.jnu.festival.global.security;
+package com.jnu.festival.global.security.auth;
 
 import com.jnu.festival.domain.user.entity.User;
 import lombok.Getter;

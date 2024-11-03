@@ -1,4 +1,4 @@
-package com.jnu.festival.global.security.config;
+package com.jnu.festival.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ public class CorsConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
 
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:5173", "https://jeon-on-fe.vercel.app", "https://sdf-sffseadf-ac9p-sadf.vercel.app"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE"));
         corsConfiguration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "Access-Token"));
         corsConfiguration.setExposedHeaders(List.of("Authorization", "Content-Type", "Accept", "Access-Token"));

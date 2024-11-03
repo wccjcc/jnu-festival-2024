@@ -1,5 +1,6 @@
-package com.jnu.festival.global.error;
+package com.jnu.festival.global.common;
 
+import com.jnu.festival.global.error.ErrorCode;
 import lombok.Getter;
 
 @Getter

@@ -1,12 +1,10 @@
 package com.jnu.festival.domain.zone.service;
 
-import com.jnu.festival.domain.common.Location;
+import com.jnu.festival.global.common.Location;
 import com.jnu.festival.domain.zone.dto.response.ZoneListDto;
 import com.jnu.festival.domain.zone.entity.Zone;
 import com.jnu.festival.domain.zone.repository.ZoneRepository;
-import com.jnu.festival.global.error.ErrorCode;
 import com.jnu.festival.global.error.exception.BusinessException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,10 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +19,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 class ZoneServiceTest {
-    private MockMvc mockMvc;
     @Mock
     private ZoneRepository zoneRepository;
 
@@ -39,9 +30,6 @@ class ZoneServiceTest {
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders
-                .standaloneSetup(zoneService)
-                .build();
     }
 
     @AfterEach

@@ -1,4 +1,4 @@
-package com.jnu.festival.domain.common;
+package com.jnu.festival.global.common;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;

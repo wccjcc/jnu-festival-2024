@@ -1,4 +1,4 @@
-package com.jnu.festival.global.security;
+package com.jnu.festival.global.security.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;

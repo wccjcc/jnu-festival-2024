@@ -1,8 +1,8 @@
-package com.jnu.festival.global.security;
+package com.jnu.festival.global.security.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jnu.festival.global.error.ErrorCode;
-import com.jnu.festival.global.error.ExceptionDto;
+import com.jnu.festival.global.common.ExceptionDto;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

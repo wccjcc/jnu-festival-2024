@@ -1,15 +1,15 @@
-package com.jnu.festival.global.util;
+package com.jnu.festival.global.common;
 
 import com.jnu.festival.global.error.ErrorCode;
-import com.jnu.festival.global.error.ExceptionDto;
-import com.jnu.festival.global.error.exception.ArgumentNotValidExceptionDto;
 import com.jnu.festival.global.error.exception.BusinessException;
+import jakarta.validation.ConstraintViolationException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -49,13 +49,18 @@ public class ResponseDto<T> {
         return new ResponseDto<>(false, null, new ArgumentNotValidExceptionDto(e));
     }
 
-//    public static ResponseDto<Object> fail(final ConstraintViolationException e) {
-//        return new ResponseDto<>(HttpStatus.BAD_REQUEST, false, null, new ArgumentNotValidExceptionDto(e));
-//    }
-//
+    public static ResponseDto<Object> fail(final ConstraintViolationException e) {
+        System.out.println("response dto fail");
+        return new ResponseDto<>(false, null, new ArgumentNotValidExceptionDto(e));
+    }
+
 //    public static ResponseDto<Object> fail(final UnexpectedTypeException e) {
 //        return new ResponseDto<>(HttpStatus.BAD_REQUEST, false, null, ExceptionDto.of(ErrorCode.INVALID_PARAMETER_FORMAT));
 //    }
+
+    public static ResponseDto<Object> fail(final MissingPathVariableException e) {
+        return new ResponseDto<>(false, null, ExceptionDto.of(ErrorCode.MISSING_PATH_VARIABLE));
+    }
 
     public static ResponseDto<Object> fail(final MissingServletRequestParameterException e) {
         return new ResponseDto<>(false, null, ExceptionDto.of(ErrorCode.MISSING_REQUEST_PARAMETER));

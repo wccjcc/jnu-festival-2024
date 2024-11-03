@@ -1,4 +1,4 @@
-package com.jnu.festival.global.jwt;
+package com.jnu.festival.global.security.jwt;
 
 
 import com.jnu.festival.global.error.ErrorCode;
@@ -15,13 +15,9 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
@@ -30,16 +26,18 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        List<String> passUris = Arrays.asList(
-                "/api/v1/login"
-        );
+//        List<String> passUris = Arrays.asList(
+//                "/api/v1/login"
+//        );
+//
+//        // 현재 회원가입과 로그인이 동일
+//        // JWTAuthenticationFilter가 DefaultAuthenticationFilter보다 앞에 위치
+//        if (passUris.contains(request.getRequestURI())) {
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
 
-        if (passUris.contains(request.getRequestURI())) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        String unpreparedToken = request.getHeader("Authorization");
+        String rawToken = request.getHeader("Authorization");
 
         // 의문사항
         // 1. 아래와 같이 작성한 이유가 분명 있었는데 기억이 안 난다...
@@ -48,11 +46,16 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 //            return;
 //        }
 
-        if (unpreparedToken == null || !unpreparedToken.startsWith("Bearer ")) {
+//        if (rawToken == null) {
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
+
+        if (rawToken == null || !rawToken.startsWith("Bearer ")) {
             throw new BusinessException(ErrorCode.INVALID_HEADER_ERROR);
         }
 
-        String token = unpreparedToken.substring("Bearer ".length());
+        String token = rawToken.substring("Bearer ".length());
 
         Claims claims = jwtUtil.validateToken(token);
 

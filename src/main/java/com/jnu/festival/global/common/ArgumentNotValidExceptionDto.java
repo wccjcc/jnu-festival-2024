@@ -1,9 +1,10 @@
-package com.jnu.festival.global.error.exception;
+package com.jnu.festival.global.common;
 
+import com.jnu.festival.global.common.ExceptionDto;
 import com.jnu.festival.global.error.ErrorCode;
-import com.jnu.festival.global.error.ExceptionDto;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import lombok.Getter;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
@@ -22,13 +23,14 @@ public class ArgumentNotValidExceptionDto extends ExceptionDto {
                 .getAllErrors().forEach(e -> this.errorFields.put(((FieldError) e).getField(), e.getDefaultMessage()));
     }
 
-//    public ArgumentNotValidExceptionDto(final ConstraintViolationException constraintViolationException) {
-//        super(ErrorCode.INVALID_ARGUMENT);
-//
-//        this.errorFields = new HashMap<>();
-//
-//        for (ConstraintViolation<?> constraintViolation : constraintViolationException.getConstraintViolations()) {
-//            errorFields.put(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
-//        }
-//    }
+    public ArgumentNotValidExceptionDto(final ConstraintViolationException constraintViolationException) {
+        super(ErrorCode.INVALID_ARGUMENT);
+        System.out.println("argument not");
+
+        this.errorFields = new HashMap<>();
+
+        for (ConstraintViolation<?> constraintViolation : constraintViolationException.getConstraintViolations()) {
+            errorFields.put(constraintViolation.getPropertyPath().toString(), constraintViolation.getMessage());
+        }
+    }
 }

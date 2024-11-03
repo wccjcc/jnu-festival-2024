@@ -1,4 +1,4 @@
-package com.jnu.festival.global.jwt;
+package com.jnu.festival.global.security.jwt;
 
 import com.jnu.festival.global.error.ErrorCode;
 import com.jnu.festival.global.error.exception.BusinessException;
