@@ -40,6 +40,7 @@ import com.jnu.festival.domain.zone.repository.ZoneRepository;
 import com.jnu.festival.global.config.S3Service;
 import com.jnu.festival.global.error.ErrorCode;
 import com.jnu.festival.global.error.exception.BusinessException;
+import com.jnu.festival.global.util.LocalDateTimeConvertUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,9 +73,10 @@ public class AdminService {
 
     @Transactional
     public void createZone(ZoneRequestDto request) {
-        if (Location.from(request.location()) == null) {
-            throw new BusinessException(ErrorCode.INVALID_LOCATION);
-        }
+
+//        if (Location.from(request.location()) == null) {
+//            throw new BusinessException(ErrorCode.INVALID_LOCATION);
+//        }
 
         zoneRepository.save(
                 Zone.builder()
@@ -103,12 +105,15 @@ public class AdminService {
                         .description(request.description())
                         .build()
         );
+        System.out.println(2);
 
         if (images != null) {
+            System.out.println(3);
             List<PartnerImage> partnerImages = new ArrayList<>();
 
             for (MultipartFile image : images) {
                 String url = s3Service.upload(image, "partner");
+                System.out.println(4);
                 PartnerImage partnerImage = PartnerImage.builder()
                         .partner(partner)
                         .url(url)
@@ -252,7 +257,7 @@ public class AdminService {
                         .id(feedback.getId())
                         .nickname(feedback.getUser().getNickname())
                         .title(feedback.getTitle())
-                        .createdAt(feedback.getCreatedAt())
+                        .createdAt(LocalDateTimeConvertUtil.convertUtcToLocalDateTIme(feedback.getCreatedAt()))
                         .build())
                 .toList();
     }
@@ -268,7 +273,7 @@ public class AdminService {
                 .title(feedback.getTitle())
                 .content(feedback.getContent())
                 .images(feedbackImages)
-                .createdAt(feedback.getCreatedAt())
+                .createdAt(LocalDateTimeConvertUtil.convertUtcToLocalDateTIme(feedback.getCreatedAt()))
                 .build();
     }
 }

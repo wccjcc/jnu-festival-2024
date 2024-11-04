@@ -97,7 +97,7 @@ public class UserService {
     public List<BoothBookmarkListDto> readBoothBookmark(UserDetailsImpl userDetails) {
         User user = userRepository.findByNickname(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_USER));
-        List<Booth> booths = boothBookmarkRepository.findAllByUserAndIsDeleted(user);  //is_deleted true 인것만 가져와야함
+        List<Booth> booths = boothBookmarkRepository.findAllByUserAndIsDeleted(user);  //is_deleted false 인것만 가져와야함
         return booths.stream()
                 .map(booth -> BoothBookmarkListDto.builder()
                         .id(booth.getId())
