@@ -90,15 +90,7 @@ public class DefaultAuthenticationFilter extends AbstractAuthenticationProcessin
             accessToken = jwtUtil.generateToken(userDetails);
             userService.updateAccessToken(userDetails, accessToken);
         }
-//        response.setHeader("Access-Token", accessToken);
-
-        Cookie cookie = new Cookie("Authorization", accessToken);
-        cookie.setPath("/");
-        cookie.setSecure(true);
-        cookie.setHttpOnly(true);
-        cookie.setMaxAge(60 * 60 * 24 * 7);
-
-        response.addCookie(cookie);
+        response.setHeader("Access-Token", accessToken);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
