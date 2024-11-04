@@ -36,7 +36,7 @@ public class AdminController {
     }
 
     @PostMapping(value = "/partners", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseEntity<?> createPartner(@Valid @RequestPart PartnerRequestDto request, @RequestPart(required = false) List<MultipartFile> images) throws Exception {
+    public ResponseEntity<?> createPartner(@RequestPart PartnerRequestDto request, @RequestPart(required = false) List<MultipartFile> images) throws Exception {
         adminService.createPartner(request, images);
         return ResponseEntity.ok(ResponseDto.created(null));
     }
