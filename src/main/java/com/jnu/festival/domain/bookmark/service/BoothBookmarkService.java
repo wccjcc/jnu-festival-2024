@@ -54,6 +54,6 @@ public class BoothBookmarkService {
                 .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_BOOTH));
         BoothBookmark boothBookmark = boothBookmarkRepository.findByUserAndBooth(user, booth)
                 .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_BOOTHBOOKMARK));
-        boothBookmarkRepository.delete(boothBookmark);
+        boothBookmarkRepository.delete(boothBookmark);   //여기서 delete가 is_deleted true로 전환됨, 완전 삭제x
     }
 }
