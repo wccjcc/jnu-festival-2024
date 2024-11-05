@@ -6,7 +6,7 @@ import com.jnu.festival.domain.booth.dto.BoothDto;
 import com.jnu.festival.domain.booth.dto.BoothListDto;
 import com.jnu.festival.domain.booth.repository.BoothRepository;
 import com.jnu.festival.domain.booth.service.BoothService;
-import com.jnu.festival.global.util.ResponseDto;
+import com.jnu.festival.global.common.ResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,11 +42,11 @@ class BoothControllerTest {
     @Mock
     private BoothService boothService;
 
-    @Autowired
+
     private MockMvc mockMvc;
 
 
-    @Autowired
+
     private BoothRepository boothRepository;
 
     private List<BoothListDto> boothList;

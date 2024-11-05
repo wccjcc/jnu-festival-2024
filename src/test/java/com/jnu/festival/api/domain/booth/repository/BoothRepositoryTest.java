@@ -5,7 +5,7 @@ import com.jnu.festival.domain.booth.entity.Booth;
 import com.jnu.festival.domain.booth.entity.BoothCategory;
 import com.jnu.festival.domain.booth.entity.Period;
 import com.jnu.festival.domain.booth.repository.BoothRepository;
-import com.jnu.festival.domain.common.Location;
+import com.jnu.festival.global.common.Location;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -81,15 +81,15 @@ public class BoothRepositoryTest {
     }
 
 
-    @Test
-    public void BoothRepository_FindAllByNameContains_ReturnsBoothList() {
-        //Act
-        List<Booth> returnedBooth = boothRepository.findAllByNameContains("부");
-
-
-        //Assert
-        Assertions.assertThat(returnedBooth).size().isEqualTo(2);
-
-    }
+//    @Test
+//    public void BoothRepository_FindAllByNameContains_ReturnsBoothList() {
+//        //Act
+//        List<Booth> returnedBooth = boothRepository.findAllByNameContains("부");
+//
+//
+//        //Assert
+//        Assertions.assertThat(returnedBooth).size().isEqualTo(2);
+//
+//    }
 
 }

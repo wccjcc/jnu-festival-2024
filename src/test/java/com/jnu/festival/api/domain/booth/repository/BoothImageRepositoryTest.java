@@ -6,7 +6,7 @@ import com.jnu.festival.domain.booth.entity.BoothImage;
 import com.jnu.festival.domain.booth.entity.Period;
 import com.jnu.festival.domain.booth.repository.BoothImageRepository;
 import com.jnu.festival.domain.booth.repository.BoothRepository;
-import com.jnu.festival.domain.common.Location;
+import com.jnu.festival.global.common.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@ package com.jnu.festival.domain.bookmark.repository;
 
 import com.jnu.festival.domain.bookmark.entity.PartnerBookmark;
 
-import com.jnu.festival.domain.partner.Repository.PartnerRepository;
+import com.jnu.festival.domain.partner.repository.PartnerRepository;
 
 import com.jnu.festival.domain.partner.entity.Partner;
 import com.jnu.festival.domain.user.entity.Role;
