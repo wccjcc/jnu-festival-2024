@@ -17,7 +17,7 @@ import com.jnu.festival.domain.booth.repository.BoothImageRepository;
 import com.jnu.festival.domain.booth.repository.BoothRepository;
 import com.jnu.festival.domain.comment.entity.Comment;
 import com.jnu.festival.domain.comment.repository.CommentRepository;
-import com.jnu.festival.domain.common.Location;
+import com.jnu.festival.global.common.Location;
 import com.jnu.festival.domain.content.entity.Content;
 import com.jnu.festival.domain.content.entity.ContentImage;
 import com.jnu.festival.domain.content.repository.ContentImageRepository;
@@ -35,11 +35,12 @@ import com.jnu.festival.domain.partner.Repository.PartnerRepository;
 import com.jnu.festival.domain.timecapsule.entity.Timecapsule;
 import com.jnu.festival.domain.timecapsule.repository.TimecapsuleImageRepository;
 import com.jnu.festival.domain.timecapsule.repository.TimecapsuleRepository;
-import com.jnu.festival.domain.zone.Entity.Zone;
-import com.jnu.festival.domain.zone.Repository.ZoneRepository;
+import com.jnu.festival.domain.zone.entity.Zone;
+import com.jnu.festival.domain.zone.repository.ZoneRepository;
 import com.jnu.festival.global.config.S3Service;
 import com.jnu.festival.global.error.ErrorCode;
 import com.jnu.festival.global.error.exception.BusinessException;
+import com.jnu.festival.global.util.LocalDateTimeConvertUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,6 +73,11 @@ public class AdminService {
 
     @Transactional
     public void createZone(ZoneRequestDto request) {
+
+//        if (Location.from(request.location()) == null) {
+//            throw new BusinessException(ErrorCode.INVALID_LOCATION);
+//        }
+
         zoneRepository.save(
                 Zone.builder()
                         .name(request.name())
@@ -99,12 +105,15 @@ public class AdminService {
                         .description(request.description())
                         .build()
         );
+        System.out.println(2);
 
         if (images != null) {
+            System.out.println(3);
             List<PartnerImage> partnerImages = new ArrayList<>();
 
-            for (MultipartFile image: images) {
+            for (MultipartFile image : images) {
                 String url = s3Service.upload(image, "partner");
+                System.out.println(4);
                 PartnerImage partnerImage = PartnerImage.builder()
                         .partner(partner)
                         .url(url)
@@ -138,7 +147,7 @@ public class AdminService {
         if (images != null) {
             List<ContentImage> contentImages = new ArrayList<>();
 
-            for (MultipartFile image: images) {
+            for (MultipartFile image : images) {
                 String url = s3Service.upload(image, "content");
                 ContentImage contentImage = ContentImage.builder()
                         .content(content)
@@ -163,6 +172,14 @@ public class AdminService {
 
     @Transactional
     public void createBooth(BoothRequestDto request, List<MultipartFile> images) throws IOException {
+        if (Location.from(request.location()) == null) {
+            throw new BusinessException(ErrorCode.INVALID_LOCATION);
+        }
+
+        if (BoothCategory.from(request.category()) == null) {
+            throw new BusinessException(ErrorCode.INVALID_LOCATION);
+        }
+
         Booth booth = boothRepository.save(
                 Booth.builder()
                         .name(request.name())
@@ -181,7 +198,7 @@ public class AdminService {
         if (images != null) {
             List<BoothImage> boothImages = new ArrayList<>();
 
-            for (MultipartFile image: images) {
+            for (MultipartFile image : images) {
                 String url = s3Service.upload(image, "booth");
                 BoothImage boothImage = BoothImage.builder()
                         .booth(booth)
@@ -230,13 +247,17 @@ public class AdminService {
     }
 
     public List<FeedbackListDto> readFeedbackList(String category) {
+        if (!category.isEmpty() && FeedbackCategory.from(category) == null) {
+            throw new BusinessException(ErrorCode.INVALID_CATEGORY);
+        }
+
         List<Feedback> feedbacks = feedbackRepository.findAllByCategory(FeedbackCategory.from(category));
         return feedbacks.stream()
                 .map(feedback -> FeedbackListDto.builder()
                         .id(feedback.getId())
                         .nickname(feedback.getUser().getNickname())
                         .title(feedback.getTitle())
-                        .createdAt(feedback.getCreatedAt())
+                        .createdAt(LocalDateTimeConvertUtil.convertUtcToLocalDateTIme(feedback.getCreatedAt()))
                         .build())
                 .toList();
     }
@@ -252,7 +273,7 @@ public class AdminService {
                 .title(feedback.getTitle())
                 .content(feedback.getContent())
                 .images(feedbackImages)
-                .createdAt(feedback.getCreatedAt())
+                .createdAt(LocalDateTimeConvertUtil.convertUtcToLocalDateTIme(feedback.getCreatedAt()))
                 .build();
     }
 }

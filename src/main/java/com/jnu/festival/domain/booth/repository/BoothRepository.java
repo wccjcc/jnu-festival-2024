@@ -3,7 +3,7 @@ package com.jnu.festival.domain.booth.repository;
 import com.jnu.festival.domain.booth.entity.Booth;
 import com.jnu.festival.domain.booth.entity.BoothCategory;
 import com.jnu.festival.domain.booth.entity.Period;
-import com.jnu.festival.domain.common.Location;
+import com.jnu.festival.global.common.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,5 +16,5 @@ public interface BoothRepository extends JpaRepository<Booth, Long> {
                                                          @Param("category") BoothCategory category,
                                                          @Param("period") Period period);
 
-    List<Booth> findAllByNameContains(String keyword);
+    List<Booth> findAllByNameContainsIgnoreCase(String keyword);
 }

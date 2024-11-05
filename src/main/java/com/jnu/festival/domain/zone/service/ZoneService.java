@@ -1,15 +1,15 @@
-package com.jnu.festival.domain.zone.Service;
+package com.jnu.festival.domain.zone.service;
 
-import com.jnu.festival.domain.common.Location;
-import com.jnu.festival.domain.zone.DTO.response.ZoneListDto;
-import com.jnu.festival.domain.zone.Entity.Zone;
-import com.jnu.festival.domain.zone.Repository.ZoneRepository;
+
+import com.jnu.festival.domain.zone.dto.response.ZoneListDto;
+import com.jnu.festival.domain.zone.entity.Zone;
+import com.jnu.festival.domain.zone.repository.ZoneRepository;
+import com.jnu.festival.global.common.Location;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

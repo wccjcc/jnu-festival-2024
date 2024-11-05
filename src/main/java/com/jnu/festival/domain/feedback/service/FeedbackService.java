@@ -1,6 +1,5 @@
 package com.jnu.festival.domain.feedback.service;
 
-import com.jnu.festival.domain.common.Location;
 import com.jnu.festival.domain.feedback.dto.FeedbackRequestDto;
 import com.jnu.festival.domain.feedback.entity.Feedback;
 import com.jnu.festival.domain.feedback.entity.FeedbackCategory;
@@ -12,12 +11,11 @@ import com.jnu.festival.domain.user.repository.UserRepository;
 import com.jnu.festival.global.config.S3Service;
 import com.jnu.festival.global.error.ErrorCode;
 import com.jnu.festival.global.error.exception.BusinessException;
-import com.jnu.festival.global.security.UserDetailsImpl;
+import com.jnu.festival.global.security.auth.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import software.amazon.awssdk.services.s3.S3Client;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +30,12 @@ public class FeedbackService {
     private final FeedbackImageRepository feedbackImageRepository;
 
     @Transactional
-    public void createFeedback(FeedbackRequestDto request, MultipartFile image, UserDetailsImpl userDetails) throws IOException {
+
+    public void createFeedback(FeedbackRequestDto request, List<MultipartFile> images, UserDetailsImpl userDetails) throws IOException {
+        if (!request.category().isEmpty() && FeedbackCategory.from(request.category()) == null) {
+            throw new BusinessException(ErrorCode.INVALID_CATEGORY);
+        }
+
         User user = userRepository.findByNickname(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessException(ErrorCode.NOT_FOUND_USER));
 
@@ -45,13 +48,18 @@ public class FeedbackService {
                         .build()
         );
 
-        if (image != null) {
-            String url = s3Service.upload(image, "feedback");
-            FeedbackImage feedbackImage = FeedbackImage.builder()
-                    .feedback(feedback)
-                    .url(url)
-                    .build();
-            feedbackImageRepository.save(feedbackImage);
+        if (images != null) {
+            List<FeedbackImage> feedbackImages = new ArrayList<>();
+
+            for (MultipartFile image : images) {
+                String url = s3Service.upload(image, "feedback");
+                FeedbackImage feedbackImage = FeedbackImage.builder()
+                        .feedback(feedback)
+                        .url(url)
+                        .build();
+                feedbackImages.add(feedbackImage);
+            }
+            feedbackImageRepository.saveAll(feedbackImages);
         }
     }
 }

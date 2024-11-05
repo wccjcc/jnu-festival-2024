@@ -1,7 +1,7 @@
 package com.jnu.festival.domain.booth.entity;
 
 
-import com.jnu.festival.domain.common.Location;
+import com.jnu.festival.global.common.Location;
 
 import com.jnu.festival.global.util.BaseTimeEntity;
 import jakarta.persistence.*;
@@ -44,7 +44,7 @@ public class Booth extends BaseTimeEntity {
     @Column(name = "end_time", nullable = false)
     private LocalTime endTime;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = false, length = 1000)
     private String description;
 
     @Column(name = "category", nullable = false)

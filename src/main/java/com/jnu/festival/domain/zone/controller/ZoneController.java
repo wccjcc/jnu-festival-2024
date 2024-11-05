@@ -1,8 +1,10 @@
-package com.jnu.festival.domain.zone.Controller;
+package com.jnu.festival.domain.zone.controller;
 
-import com.jnu.festival.domain.zone.DTO.response.ZoneListDto;
-import com.jnu.festival.domain.zone.Service.ZoneService;
-import com.jnu.festival.global.util.ResponseDto;
+
+import com.jnu.festival.domain.zone.dto.response.ZoneListDto;
+import com.jnu.festival.domain.zone.service.ZoneService;
+import com.jnu.festival.global.common.ResponseDto;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

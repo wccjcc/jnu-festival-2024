@@ -4,14 +4,13 @@ import com.jnu.festival.domain.booth.service.BoothService;
 import com.jnu.festival.domain.comment.dto.request.CommentRequestDto;
 import com.jnu.festival.domain.comment.dto.response.CommentListDto;
 import com.jnu.festival.domain.comment.service.CommentService;
-import com.jnu.festival.global.security.UserDetailsImpl;
-import com.jnu.festival.global.util.ResponseDto;
+import com.jnu.festival.global.security.auth.UserDetailsImpl;
+import com.jnu.festival.global.common.ResponseDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,7 +26,7 @@ public class CommentController {
     }
 
     @PostMapping(value = "/{boothId}/comments")
-    public ResponseEntity<?> createComment(@PathVariable Long boothId, @RequestBody CommentRequestDto request, @AuthenticationPrincipal UserDetailsImpl userDetails) throws Exception {
+    public ResponseEntity<?> createComment(@PathVariable Long boothId, @Valid @RequestBody CommentRequestDto request, @AuthenticationPrincipal UserDetailsImpl userDetails) throws Exception {
         commentService.createComment(boothId, request, userDetails);
         return ResponseEntity.ok(ResponseDto.created(null));
     }

@@ -33,6 +33,7 @@ dependencies {
     implementation 'jakarta.validation:jakarta.validation-api:3.1.0'
     implementation platform('software.amazon.awssdk:bom:2.28.21')
     implementation 'software.amazon.awssdk:s3:2.28.21'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
@@ -41,9 +42,14 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // test Mockito
+    testImplementation 'org.mockito:mockito-core:4.8.0'
+    // assertj
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+    //h2 for test
+    implementation 'com.h2database:h2'
     implementation 'org.mapstruct:mapstruct:1.6.2'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.2'
-
 }
 
 tasks.named('test') {
